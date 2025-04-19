@@ -26,9 +26,9 @@ async fn main() -> anyhow::Result<()> {
     match args.mode.as_str() {
         "db" => {
             let pool = write_pool(None).await;
-            let mut transaciton = create_txn(&pool).await?;
-            health_check(&mut *transaciton).await?;
-            commit_txn(transaciton).await?;
+            let mut transaction = create_txn(&pool).await?;
+            health_check(&mut *transaction).await?;
+            commit_txn(transaction).await?;
         }
         "ws" => {
             run_client(args.num_clients.unwrap_or(10)).await;
